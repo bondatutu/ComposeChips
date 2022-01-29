@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
@@ -27,7 +29,7 @@ import com.google.accompanist.flowlayout.FlowRow
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
-fun <T> BoxChipText(
+fun <T> MaterialChipText(
     modifier: Modifier = Modifier,
     textPadding: Dp = 8.dp,
     searchableItems: List<T>,
@@ -35,6 +37,8 @@ fun <T> BoxChipText(
     text: String,
     shape: Shape = MaterialTheme.shapes.medium,
     borderStroke: BorderStroke = BorderStroke(2.dp, MaterialTheme.colors.primary),
+    baseLineSpacing: Dp = 2.dp,
+    baseLineColor: Color = MaterialTheme.colors.primary,
     onValueChange: (String) -> Unit,
     onKeyEvent: (KeyEvent) -> Unit,
     chipContent: @Composable (T) -> Unit,
@@ -52,15 +56,14 @@ fun <T> BoxChipText(
     val focusRequester = FocusRequester()
 
     Column(modifier = modifier, verticalArrangement = Arrangement.Center) {
-        Box(
-            contentAlignment = Alignment.CenterStart,
+        Column(
             modifier = Modifier
-                .border(borderStroke, shape = shape)
                 .padding(textPadding)
                 .fillMaxWidth()
                 .clickable {
                     focusRequester.requestFocus()
-                }) {
+                }, verticalArrangement = Arrangement.Center
+        ) {
             FlowRow {
                 ChipGroup(items = chipItems) {
                     chipContent(it)
@@ -84,6 +87,13 @@ fun <T> BoxChipText(
                         false
                     }
                     .focusRequester(focusRequester = focusRequester))
+
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = baseLineSpacing),
+                    color = baseLineColor
+                )
 
             }
         }

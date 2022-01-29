@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -19,10 +19,10 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bonbon.library.ActionChip
-import com.bonbon.library.ChipText
+import com.bonbon.library.BoxChipText
+import com.bonbon.library.MaterialChipText
 import com.bonbon.library.TriggerSeparator
 import com.bonbon.myapplication.ui.theme.ComposechipTheme
 
@@ -70,7 +70,7 @@ private fun ChipTextView() {
         mutableStateListOf<ChipItem>()
     }
 
-    ChipText(
+    MaterialChipText(
         modifier = Modifier.padding(4.dp),
         searchableItems = items,
         chipItems = selectedItems,
@@ -88,7 +88,8 @@ private fun ChipTextView() {
             ActionChip(
                 text = it.value,
                 closeIcon = rememberVectorPainter(image = Icons.Default.Close),
-                avatar = it.icon?.let { it1 -> painterResource(id = it1) }
+                avatar = it.icon?.let { it1 -> painterResource(id = it1) },
+                shape = RoundedCornerShape(18.dp)
             ) {
                 selectedItems.remove(it)
             }
