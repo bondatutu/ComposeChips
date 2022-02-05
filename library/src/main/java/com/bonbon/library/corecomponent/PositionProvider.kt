@@ -1,4 +1,4 @@
-package com.bonbon.library
+package com.bonbon.library.corecomponent
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.*

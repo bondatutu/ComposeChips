@@ -1,4 +1,4 @@
-package com.bonbon.library
+package com.bonbon.library.corecomponent
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Chip(
+fun BonChip(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colors.primary,
     shape: Shape = MaterialTheme.shapes.medium,

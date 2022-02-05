@@ -1,4 +1,4 @@
-package com.bonbon.library
+package com.bonbon.library.textchipviews
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
@@ -17,6 +17,7 @@ import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.bonbon.library.corecomponent.CoreChipView
 import com.bonbon.library.model.FilterableEntity
 
 @ExperimentalAnimationApi
@@ -65,6 +66,7 @@ fun <T> OutLinedTextChipView(
             filteredItems = searchableItems.filter { item ->
                 item.filter(query = it)
             }
+            isFocused = true
             onValueChange(it)
 
         }, modifier = Modifier

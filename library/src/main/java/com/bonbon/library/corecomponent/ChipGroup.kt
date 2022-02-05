@@ -1,4 +1,4 @@
-package com.bonbon.library
+package com.bonbon.library.corecomponent
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

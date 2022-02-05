@@ -1,4 +1,4 @@
-package com.bonbon.library
+package com.bonbon.library.corecomponent
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
