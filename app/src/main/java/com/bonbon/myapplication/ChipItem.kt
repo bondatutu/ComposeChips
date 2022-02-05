@@ -1,8 +1,6 @@
 package com.bonbon.myapplication
 
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.bonbon.library.FilterableEntity
+import com.bonbon.library.model.FilterableEntity
 
 data class ChipItem(
     val value: String = "",

@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun <T>ChipGroup(
+internal fun <T>ChipGroup(
     items: List<T>,
     modifier: Modifier = Modifier,
     content: @Composable (T) -> Unit
