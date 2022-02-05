@@ -12,9 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bonbon.library.corecomponent.CoreChipView
@@ -31,6 +35,8 @@ fun <T> OutLinedTextChipView(
     text: String,
     shape: Shape = MaterialTheme.shapes.medium,
     borderStroke: BorderStroke = BorderStroke(2.dp, MaterialTheme.colors.primary),
+    textStyle: TextStyle = TextStyle.Default,
+    cursorBrush: Brush = SolidColor(Color.Black),
     onValueChange: (String) -> Unit,
     onKeyEvent: (KeyEvent) -> Unit,
     chipContent: @Composable (T) -> Unit,
@@ -80,6 +86,9 @@ fun <T> OutLinedTextChipView(
                 onKeyEvent(it)
                 false
             }
-            .focusRequester(focusRequester = focusRequester))
+            .focusRequester(focusRequester = focusRequester),
+            cursorBrush = cursorBrush,
+            textStyle = textStyle
+        )
     }
 }

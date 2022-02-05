@@ -11,10 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bonbon.library.corecomponent.CoreChipView
@@ -30,6 +33,8 @@ fun <T> MaterialTextChipView(
     chipItems: List<T>,
     text: String,
     shape: Shape = MaterialTheme.shapes.medium,
+    textStyle: TextStyle = TextStyle.Default,
+    cursorBrush: Brush = SolidColor(Color.Black),
     baseLineSpacing: Dp = 2.dp,
     baseLineColor: Color = MaterialTheme.colors.primary,
     focused: Boolean = false,
@@ -81,7 +86,10 @@ fun <T> MaterialTextChipView(
                 onKeyEvent(it)
                 false
             }
-            .focusRequester(focusRequester = focusRequester))
+            .focusRequester(focusRequester = focusRequester),
+            textStyle = textStyle,
+            cursorBrush = cursorBrush
+        )
 
         Divider(
             modifier = Modifier

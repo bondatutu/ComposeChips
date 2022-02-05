@@ -15,7 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.bonbon.library.corecomponent.BonChip
 
@@ -24,6 +28,7 @@ fun ActionChip(
     text: String,
     modifier: Modifier = Modifier,
     avatar: Painter? = null,
+    fontSize: TextUnit = TextUnit.Unspecified,
     color: Color = MaterialTheme.colors.primary,
     shape: Shape = MaterialTheme.shapes.medium,
     textStyle: TextStyle = LocalTextStyle.current,
@@ -54,7 +59,8 @@ fun ActionChip(
                 Text(
                     text = text,
                     style = textStyle,
-                    modifier = Modifier.padding(8.dp, 4.dp)
+                    modifier = Modifier.padding(8.dp, 4.dp),
+                    fontSize = fontSize
                 )
 
                 Icon(

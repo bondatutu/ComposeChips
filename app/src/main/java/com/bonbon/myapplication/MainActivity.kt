@@ -18,11 +18,15 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bonbon.library.*
 import com.bonbon.library.textchipviews.MaterialTextChipView
 import com.bonbon.library.textchipviews.OutLinedTextChipView
@@ -164,11 +168,12 @@ private fun MaterialChipTextViewDemo() {
     }
 
     MaterialTextChipView(
-        modifier = Modifier.padding(4.dp),
+        modifier = Modifier.padding(4.dp, end = 100.dp),
         searchableItems = items,
         chipItems = selectedItems,
         shape = RoundedCornerShape(6.dp),
         text = text,
+        textStyle = TextStyle.Default.copy(fontSize = 12.sp),
         onValueChange = {
             text = if (it.trim().isNotEmpty() && it.contains(TriggerSeparator.Space.value)) {
                 val trimmedText = text.trim()
@@ -179,11 +184,13 @@ private fun MaterialChipTextViewDemo() {
             }
         },
         chipContent = {
+
+            // can create your own buy using BonChip
             ActionChip(
                 text = it.value,
                 closeIcon = rememberVectorPainter(image = Icons.Default.Close),
                 avatar = it.icon?.let { it1 -> painterResource(id = it1) },
-                shape = RoundedCornerShape(18.dp)
+                shape = RoundedCornerShape(18.dp),
             ) {
                 selectedItems.remove(it)
             }
@@ -194,7 +201,8 @@ private fun MaterialChipTextViewDemo() {
                     selectedItems.removeAt(0.coerceAtLeast(selectedItems.count() - 1))
                 }
             }
-        }
+        },
+        cursorBrush = SolidColor(Color.Red)
     ) {
         Box(modifier = Modifier
             .fillMaxWidth()
