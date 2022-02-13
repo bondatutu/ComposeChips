@@ -2,18 +2,16 @@ package com.bonbon.library.corecomponent
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
@@ -95,31 +93,36 @@ internal fun PopupContent(
             },
             properties = PopupProperties()
         ) {
-
-            Box(
-                modifier = Modifier.width(width = width),
-            ) {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Card(
-                        modifier = Modifier
-                            .graphicsLayer {
-                                scaleX = scale
-                                scaleY = scale
-                                this.alpha = alpha
-                                transformOrigin = transformOriginState.value
-                            },
-                        elevation = elevation,
-
-                        shape = shape
-                    ) {
-                        content()
-                    }
-
+            Box(modifier = Modifier.width(width)) {
+                var shouldLimitHeight by remember {
+                    mutableStateOf(false)
                 }
-            }
+                Card(
+                    modifier = Modifier
+                        .graphicsLayer {
+                            scaleX = scale
+                            scaleY = scale
+                            this.alpha = alpha
+                            transformOrigin = transformOriginState.value
+                        }
+                        .onGloballyPositioned {
+                            shouldLimitHeight = it.size.height > 500
+                        },
+                    elevation = elevation,
+                    shape = shape
+                ) {
+                    if (shouldLimitHeight) {
+                        Box(modifier = Modifier.height(200.dp)) {
+                            content()
+                        }
+                    } else {
+                        Box {
+                            content()
+                        }
+                    }
+                }
 
+            }
         }
     }
-
-
 }

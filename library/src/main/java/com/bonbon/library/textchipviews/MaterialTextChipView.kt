@@ -72,6 +72,10 @@ fun <T> MaterialTextChipView(
             filteredItems = searchableItems.filter { item ->
                 item.filter(query = it)
             }
+            if (filteredItems.count() <= 0) {
+                filteredItems = searchableItems
+            }
+
             isFocused = true
             onValueChange(it)
 

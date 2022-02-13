@@ -10,8 +10,7 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -27,10 +26,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bonbon.library.*
+import com.bonbon.library.ActionChip
+import com.bonbon.library.TriggerSeparator
 import com.bonbon.library.textchipviews.MaterialTextChipView
 import com.bonbon.library.textchipviews.OutLinedTextChipView
 import com.bonbon.myapplication.ui.theme.ComposechipTheme
+import com.google.accompanist.insets.ProvideWindowInsets
+
 
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi
@@ -39,40 +41,34 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposechipTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    color = MaterialTheme.colors.background
+                ProvideWindowInsets(
                 ) {
                     val scrollState = rememberScrollState()
-                   Column {
-                       Box(
-                           modifier = Modifier.scrollable(
-                               scrollState,
-                               orientation = Orientation.Vertical
-                           )
-                       ) {
-                           Row {
-                               Text(text = "To", modifier = Modifier.width(50.dp))
-                               MaterialChipTextViewDemo()
-                           }
-                       }
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                        Box(
+                            modifier = Modifier.scrollable(
+                                scrollState,
+                                orientation = Orientation.Vertical
+                            )
+                        ) {
+                            Row {
+                                Text(text = "To", modifier = Modifier.width(50.dp))
+                                MaterialChipTextViewDemo()
+                            }
+                        }
 
-                       Box(
-                           modifier = Modifier.scrollable(
-                               scrollState,
-                               orientation = Orientation.Vertical
-                           )
-                       ) {
-                           Row {
-                               Text(text = "To", modifier = Modifier.width(50.dp))
-                               OutLineChipTextViewDemo()
-                           }
-                       }
-
-
-                   }
-
-
+                        Box(
+                            modifier = Modifier.scrollable(
+                                scrollState,
+                                orientation = Orientation.Vertical
+                            )
+                        ) {
+                            Row {
+                                Text(text = "To", modifier = Modifier.width(50.dp))
+                                OutLineChipTextViewDemo()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -132,7 +128,8 @@ private fun OutLineChipTextViewDemo() {
                     selectedItems.removeAt(0.coerceAtLeast(selectedItems.count() - 1))
                 }
             }
-        }
+        },
+        textStyle = TextStyle.Default.copy(color = Color.Red)
     ) {
         Box(modifier = Modifier
             .fillMaxWidth()
@@ -177,6 +174,7 @@ private fun MaterialChipTextViewDemo() {
         onValueChange = {
             text = if (it.trim().isNotEmpty() && it.contains(TriggerSeparator.Space.value)) {
                 val trimmedText = text.trim()
+                items.add(ChipItem(trimmedText))
                 selectedItems.add(ChipItem(trimmedText))
                 ""
             } else {

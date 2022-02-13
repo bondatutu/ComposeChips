@@ -12,6 +12,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bonbon.library.model.FilterableEntity
@@ -27,6 +29,7 @@ internal fun <T> CoreChipView(
     filteredItems: List<T>,
     chipItems: List<T>,
     shape: Shape = MaterialTheme.shapes.medium,
+    keyboardController: SoftwareKeyboardController? = LocalSoftwareKeyboardController.current,
     isFocused: Boolean = false,
     onClicked: (Boolean) -> Unit,
     chipContent: @Composable (T) -> Unit,
@@ -43,6 +46,7 @@ internal fun <T> CoreChipView(
                     .fillMaxWidth()
                     .clickable {
                         onClicked(true)
+                        keyboardController?.show()
                         focusRequester.requestFocus()
 
                     }, verticalArrangement = Arrangement.Center
@@ -75,8 +79,6 @@ internal fun <T> CoreChipView(
                     }
                 )
             }
-
-
         }
 
     }
