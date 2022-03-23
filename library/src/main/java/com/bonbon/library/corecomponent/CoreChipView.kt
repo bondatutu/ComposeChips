@@ -22,7 +22,7 @@ import com.google.accompanist.flowlayout.FlowRow
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
-internal fun <T> CoreChipView(
+fun <T> CoreChipView(
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester,
     textPadding: Dp = 8.dp,
